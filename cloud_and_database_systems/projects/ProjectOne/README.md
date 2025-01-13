@@ -1,5 +1,5 @@
 DESCRIPTION: A wiki-like website for superheroes, including a naive login system which supports for saving
-  favorite heroes. 
+  favorite heroes. One of the goals was to implement CRUD.
 
 TECHNOLOGIES: SQL database via AWS RDS, NoSQL database via AWS DynamoDB, web app hosted via Flask.
 
