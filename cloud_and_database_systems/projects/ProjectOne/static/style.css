@@ -1,0 +1,21 @@
+body {
+    margin: 0;
+}
+
+a {
+    padding: 30px;
+}
+
+.content {
+    background: white;
+    padding: 15px;
+    border-radius: 3px;
+}
+
+.image {
+    min-height: 100vh;
+    background-image: url(https://img.goodfon.com/original/2362x1408/3/6f/marvel-dc-universe-comics-art.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 70px;
+}

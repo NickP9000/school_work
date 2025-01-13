@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Account - HeroHub</title>
+    <link rel='stylesheet' href="{{url_for('static', filename='style.css')}}">
+</head>
+
+<body>
+    <div class="image">
+        <div class="content">
+            <header style="text-align:center">
+                <h1><a href="/">HeroHub</a></h1>
+                <p>Your Ultimate Superhero Destination</p>
+            </header>
+            <nav>
+                <a href="/browse">Browse</a>
+                <a href="/login">Register/Login</a>
+                <a href="/profile">Profile</a>
+                <a href="/signout">Sign Out</a>
+            </nav>
+            <main>
+                <section id="delete-account">
+                    <h2>Delete Account</h2>
+                    <p style="color:red">{{ fail }}</p>
+                    <p>To delete your HeroHub account, please type "deletemyaccount" in the box below and click the Delete button.</p>
+                    <form action="#" method="POST">
+                        <div>
+                            <label for="confirm_password">Confirm Password:</label>
+                            <input type="text" id="confirm_password" name="confirm_password" required>
+                        </div>
+                        <div>
+                            <label for="confirmation">Confirmation:</label>
+                            <input type="text" id="confirmation" name="confirmation" required>
+                        </div>
+                        <button type="submit" onclick="return confirm('Are you sure you want to delete your account?')">Delete</button>
+                    </form>
+                </section>
+            </main>
+
+            <footer>
+                <p>No copyright intended. All characters and images used belong to their respective copyright owners.</p>
+            </footer>
+        </div>
+    </div>
+</body>
+
+</html>

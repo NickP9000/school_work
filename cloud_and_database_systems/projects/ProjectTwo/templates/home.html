@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Home Page - Joke Corner</title>
+</head>
+
+<body>
+    <nav>
+        <a href="/view">View Visitor Jokes</a>
+    </nav>
+    <h1>Here is an interesting xkcd cartoon:</h1>
+    <img width="600" src="https://imgs.xkcd.com/comics/journal.png">
+    <form action="#" method="POST">
+        <div>
+            <label for="favoritejoke">Input your favorite joke:</label>
+            <input type="text" id"favoritejoke" name="favoritejoke">
+            <button type="submit">Submit</button>
+            <p style="color:green">{{ success }}</p>
+        </div>
+    </form>
+</body>
+</html>

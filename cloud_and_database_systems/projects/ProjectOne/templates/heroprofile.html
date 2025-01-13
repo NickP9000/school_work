@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse - HeroHub</title>
+    <link rel='stylesheet' href="{{url_for('static', filename='style.css')}}">
+</head>
+
+<body>
+    <div class="image">
+        <div class="content">
+            <header style="text-align:center">
+                <h1><a href="/">HeroHub</a></h1>
+                <p>Your Ultimate Superhero Destination</p>
+            </header>
+            <nav>
+                <a href="/browse">Browse</a>
+                <a href="/login">Register/Login</a>
+                <a href="/profile">Profile</a>
+                <a href="/signout">Sign Out</a>
+            </nav>
+            <main>
+                <p style="color:red">{{ fail }}</p>
+                <form action="#" method="POST" style="padding: 10px">
+                    <button type="submit" style="padding:20px" name="profile" id="profile">Add to favorites</button>
+                    <p>Name: {{ name }}</p>
+                    <p>Power: {{ power }}</p>
+                    <p>Gender: {{ gender }}</p>
+                    <p>Race: {{ race }}</p>
+                    <p>Alignment: {{ alignment }}</p>
+                    <p>Publisher: {{ publisher }}</p>
+                </form>
+            </main>
+
+            <footer>
+                <p>No copyright intended. All characters and images used belong to their respective copyright owners.</p>
+            </footer>
+        </div>
+    </div>
+</body>
+
+</html>
