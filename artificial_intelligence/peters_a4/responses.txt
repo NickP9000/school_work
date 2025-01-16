@@ -1,0 +1,51 @@
+Task 2:
+
+1. Documentation of UCS vs AStar w/misplaced tiles heuristic
+
+(2, 3, 1, 8, 0, 6, 5, 7, 4)
+==============
+Path Cost: 24
+Solution: ['DOWN', 'LEFT', 'UP', 'RIGHT', 'RIGHT', 'DOWN', 'LEFT', 'UP', 'RIGHT', 'UP', 'LEFT', 'DOWN', 'RIGHT', 'DOWN', 'LEFT', 'LEFT', 'UP', 'RIGHT', 'UP', 'LEFT', 'DOWN', 'RIGHT', 'RIGHT', 'DOWN']
+Nodes searched with UCS search: 130983
+Time Spent with  UCS search: 2.936192035675049
+==============
+Path Cost: 24
+Solution: ['LEFT', 'UP', 'RIGHT', 'RIGHT', 'DOWN', 'LEFT', 'UP', 'LEFT', 'DOWN', 'RIGHT', 'DOWN', 'RIGHT', 'UP', 'UP', 'LEFT', 'LEFT', 'DOWN', 'DOWN', 'RIGHT', 'UP', 'LEFT', 'DOWN', 'RIGHT', 'RIGHT']
+Nodes searched with A Star search: 17086
+Time Spent with A Star search: 0.7421913146972656
+==============
+
+2. Why is AStar much more effective in finding the optimal solution than UCS?
+
+One reason is that they are pretty different algorithms in how they determine what nodes to expand on. UCS is an uninformed search
+method, meaning that no clues from 8puzzle are used to decide what nodes to expand on. Instead, it picks the lowest cost in the entire
+search tree. In our case, since all the edges are set as 1, it means that UCS takes the same search path that BFS does. On the other
+hand, AStar is an informed search method, meaning that a heuristic from 8puzzle is used to decide what nodes to expand on. In this case,
+AStar uses a heuristic function which counts the number of misplaced tiles. This means that it expands the nodes with the least number
+of misplaced tiles first. This ends up searching a lot less nodes than UCS does.
+
+Task 3:
+
+1. Documentation of UCS vs AStar w/manhattan distance heuristic
+
+(2, 3, 1, 8, 0, 6, 5, 7, 4)
+==============
+Path: [<Node (2, 3, 1, 8, 0, 6, 5, 7, 4)>, <Node (2, 3, 1, 8, 7, 6, 5, 0, 4)>, <Node (2, 3, 1, 8, 7, 6, 0, 5, 4)>, <Node (2, 3, 1, 0, 7, 6, 8, 5, 4)>, <Node (2, 3, 1, 7, 0, 6, 8, 5, 4)>, <Node (2, 3, 1, 7, 6, 0, 8, 5, 4)>, <Node (2, 3, 1, 7, 6, 4, 8, 5, 0)>, <Node (2, 3, 1, 7, 6, 4, 8, 0, 5)>, <Node (2, 3, 1, 7, 0, 4, 8, 6, 5)>, <Node (2, 3, 1, 7, 4, 0, 8, 6, 5)>, <Node (2, 3, 0, 7, 4, 1, 8, 6, 5)>, <Node (2, 0, 3, 7, 4, 1, 8, 6, 5)>, <Node (2, 4, 3, 7, 0, 1, 8, 6, 5)>, <Node (2, 4, 3, 7, 1, 0, 8, 6, 5)>, <Node (2, 4, 3, 7, 1, 5, 8, 6, 0)>, <Node (2, 4, 3, 7, 1, 5, 8, 0, 6)>, <Node (2, 4, 3, 7, 1, 5, 0, 8, 6)>, <Node (2, 4, 3, 0, 1, 5, 7, 8, 6)>, <Node (2, 4, 3, 1, 0, 5, 7, 8, 6)>, <Node (2, 0, 3, 1, 4, 5, 7, 8, 6)>, <Node (0, 2, 3, 1, 4, 5, 7, 8, 6)>, <Node (1, 2, 3, 0, 4, 5, 7, 8, 6)>, <Node (1, 2, 3, 4, 0, 5, 7, 8, 6)>, <Node (1, 2, 3, 4, 5, 0, 7, 8, 6)>, <Node (1, 2, 3, 4, 5, 6, 7, 8, 0)>]
+Path Cost: 24
+Solution: ['DOWN', 'LEFT', 'UP', 'RIGHT', 'RIGHT', 'DOWN', 'LEFT', 'UP', 'RIGHT', 'UP', 'LEFT', 'DOWN', 'RIGHT', 'DOWN', 'LEFT', 'LEFT', 'UP', 'RIGHT', 'UP', 'LEFT', 'DOWN', 'RIGHT', 'RIGHT', 'DOWN']
+Nodes searched with UCS search: 130983
+Time Spent with  UCS search: 2.5561442375183105
+==============
+Path: [<Node (2, 3, 1, 8, 0, 6, 5, 7, 4)>, <Node (2, 3, 1, 8, 7, 6, 5, 0, 4)>, <Node (2, 3, 1, 8, 7, 6, 0, 5, 4)>, <Node (2, 3, 1, 0, 7, 6, 8, 5, 4)>, <Node (2, 3, 1, 7, 0, 6, 8, 5, 4)>, <Node (2, 3, 1, 7, 6, 0, 8, 5, 4)>, <Node (2, 3, 1, 7, 6, 4, 8, 5, 0)>, <Node (2, 3, 1, 7, 6, 4, 8, 0, 5)>, <Node (2, 3, 1, 7, 0, 4, 8, 6, 5)>, <Node (2, 3, 1, 7, 4, 0, 8, 6, 5)>, <Node (2, 3, 0, 7, 4, 1, 8, 6, 5)>, <Node (2, 0, 3, 7, 4, 1, 8, 6, 5)>, <Node (2, 4, 3, 7, 0, 1, 8, 6, 5)>, <Node (2, 4, 3, 7, 1, 0, 8, 6, 5)>, <Node (2, 4, 3, 7, 1, 5, 8, 6, 0)>, <Node (2, 4, 3, 7, 1, 5, 8, 0, 6)>, <Node (2, 4, 3, 7, 1, 5, 0, 8, 6)>, <Node (2, 4, 3, 0, 1, 5, 7, 8, 6)>, <Node (2, 4, 3, 1, 0, 5, 7, 8, 6)>, <Node (2, 0, 3, 1, 4, 5, 7, 8, 6)>, <Node (0, 2, 3, 1, 4, 5, 7, 8, 6)>, <Node (1, 2, 3, 0, 4, 5, 7, 8, 6)>, <Node (1, 2, 3, 4, 0, 5, 7, 8, 6)>, <Node (1, 2, 3, 4, 5, 0, 7, 8, 6)>, <Node (1, 2, 3, 4, 5, 6, 7, 8, 0)>]
+Path Cost: 24
+Solution: ['DOWN', 'LEFT', 'UP', 'RIGHT', 'RIGHT', 'DOWN', 'LEFT', 'UP', 'RIGHT', 'UP', 'LEFT', 'DOWN', 'RIGHT', 'DOWN', 'LEFT', 'LEFT', 'UP', 'RIGHT', 'UP', 'LEFT', 'DOWN', 'RIGHT', 'RIGHT', 'DOWN']
+Nodes searched with A Star search: 4060
+Time Spent with A Star search: 0.09153938293457031
+==============
+
+2. Describe why this heuristic results in improved performance.
+
+Using the number of misplaced tiles gives very little information. Using manhattan distance as the heuristic allows for more nuance
+between different states. With misplaced tiles, a node could seem promising, but need a lot more steps to reach the goal.
+Manhattan distance would code for this situation, meaning that the same node might be only explored later on. In short,
+manhattan distance appears to be the better heuristic function for 8puzzle.
