@@ -1,0 +1,42 @@
+---
+title: "Peters_Lab8_results"
+author: "Nick Peters"
+date: "2024-11-06"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+``` {r import-library}
+library(tidyverse)
+```
+
+### 1. Get Diamonds data set in tidyverse package and explore the data set.
+``` {r explore-data}
+data(diamonds)
+glimpse(diamonds)
+```
+
+### 2. Plot carat vs. price by mapping color variable in the data set to the color aesthetic.
+#### Hint: use ggplot with geom point.
+``` {r color-aesthetic}
+ggplot(diamonds, aes(carat, price, color=color)) + geom_point()
+```
+
+### 3. Define a new variable called new color as follows
+#### • If the cut is Fair, then red,
+#### • If the cut is Good, then blue,
+#### • Otherwise, green
+``` {r conditional-color}
+new_color = ifelse(diamonds$cut=="Fair", "red",
+                   ifelse(diamonds$cut=="Good", "blue", "green"))
+glimpse(new_color)
+```
+
+### 4. Finally, plot carat vs. price by mapping new color to the color aesthetic.
+``` {r new-color-aesthetic}
+ggplot(diamonds, aes(carat, price, color=new_color)) + geom_point() +
+  scale_color_manual(values=c("blue", "green", "red"))
+```

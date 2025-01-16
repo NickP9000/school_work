@@ -1,0 +1,62 @@
+---
+title: "Peters_Lab7_results"
+author: "Nick Peters"
+date: "2024-10-30"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r necessary-libraries}
+library(tidyverse)
+```
+
+### 1. Read IMDBMoviesexercise.csv, IMDBMoviesRevenueExercise.csv into Rstudio and merge two datasets by Title.
+
+#### Hint: you may need to clean the data (See R exercise 22).
+
+```{r import-merge-clean}
+movie_data = read.csv(file="IMDBMoviesExercise.csv")
+revenue_data = read.csv(file="IMDBMoviesRevenueExercise.csv")
+movie_revenue_data = merge(movie_data, revenue_data, by="Title")
+
+anyNA(movie_revenue_data$Revenue)
+anyNA(movie_revenue_data$Runtime)
+anyNA(movie_revenue_data$Rating)
+
+movie_revenue_data = drop_na(movie_revenue_data, "Revenue")
+```
+
+### 2. What is the correlation coefficient between Revenue and Run-time?
+
+```{r revenue-runtime-correlation-matrix}       
+cor(movie_revenue_data$Revenue, movie_revenue_data$Runtime)
+```
+
+### 3. Plot the linear regression line on the scatterplot of Revenue (Y) vs. Rating (X).
+
+```{r plot-rating-vs-revenue}       
+revenue_v_rating = lm(Revenue~Rating, movie_revenue_data)
+plot(Revenue~Rating, data=movie_revenue_data,
+      xlab="Rating",
+      ylab="Revenue in Millions of Dollars ($)",
+     main="Rating vs. Revenue")
+abline(revenue_v_rating, col="red")
+```
+
+### 4. Plot the linear regression line on the scatterplot of Rating (Y) vs. Runtime (X).
+
+```{r plot-runtime-vs-rating}   
+revenue_v_rating = lm(Rating~Runtime, movie_revenue_data)
+plot(Rating~Runtime, data=movie_revenue_data,
+      xlab="Runtime (Minutes)",
+      ylab="Rating",
+      main="Runtime vs. Rating")
+abline(revenue_v_rating, col="red")
+```
+
+### 5. Explain the relationships you have obtained in (3) & (4).
+##### As seen by the first graph, there is a low positive correlation between Rating and Revenue, nearing close to no correlation. 
+##### As seen by the second graph, there is a low positive correlation bewteen Runtime and Rating, having a slightly better correlation than Rating and Revenue.

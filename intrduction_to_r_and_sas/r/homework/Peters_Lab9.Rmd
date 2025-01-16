@@ -1,0 +1,32 @@
+---
+title: "Peters_Lab9_results"
+author: "Nick Peters"
+date: "2024-11-13"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### 1. Write out a function to display a given number is odd or even. You may name your function as odd or even.
+``` {r odd-or-even-func}
+odd_or_even <- function(x) {
+  if (x %% 2 == 0) {
+    print("Even")
+  } else {
+    print("Odd")
+  }
+}
+```
+
+### 2. Input any odd number (ex: 1) and make sure your function prints as odd.
+``` {r test-odd}
+odd_or_even(1)
+```
+
+### 3. Input any even number (ex: 2) and make sure your function prints as even.
+``` {r test-even}
+odd_or_even(2)
+```
+

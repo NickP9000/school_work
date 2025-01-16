@@ -1,0 +1,142 @@
+---
+title: "Peters_HW9_results"
+author: "Nick Peters"
+date: "2024-11-14"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### 1. Answer the following questions,
+
+
+#### a. What are the two types of packages in R?
+
+##### There are CRAN (Compreghensive R Archive Network) packages, which can easily be automatically downloaded by running the install.packages command with the name of the desired package. There are also packages one can find on code ditribution services such as Github. We have not discussed how to install packages of the second type.
+
+
+#### b. Discuss two methods you can use to select cases.
+
+##### One can select columns by calling the dataset and putting brackets at the end enclosed with the names of the columns one wishes to focus on. The select command from Tidyverse (specifically from dplyr) can also select columns by putting in the name of the dataset and the names of the desired columns.
+
+
+#### c. List five data types and five data structures in R. 
+
+##### Data types: integer, character, numeric, logical, complex. Data structures: matrix, array, list, vector, data frame.
+
+
+#### d. List two functions you can use to sort data in R.
+
+##### The order function and the arrange function from Tidyverse (from dplyr) are both functions one can use to sort data in R.
+
+
+#### e. What package did we use in class for data cleaning? List the nine steps of data cleaning.
+
+##### We used the Tidyverse package in class for data cleaning. 1. Import the data file and explore the data. 2. Drop columns that are not neede. 3. Rename columns so they have descriptive names and are in a consitent format. 4. Filter missing data out. 5. Remove duplicate rows from the data. 6. Transform columns when necessary (character to numeric) and create any calculated columns needed. 7. Recode variables so that any remaining NA values are normalized. 8. Merge the data with other relevant data and/or append more rows. 9. Export the data.
+
+
+#### f. List functions you can use to merge and append data in R. 
+
+##### The merge function can be used to merge data in R, adding more columns. The rbind function can be used to append data in R, adding more rows
+
+
+#### g. Explain the use of the pipe operator.
+
+##### The pipe operator is an easy way to chain functions together that rely on each others output without having to individually save the results in each step.
+
+
+#### h. Describe the advantage of using the slice max() function instead of top n().
+
+##### The slice_max function will automatically sort the data for you when supplied the name of the data, column, and number of results requested. The top_n function does not have this functionality, meaning one would need to run a sort command like order or arrange in order to achieve the same results.
+
+
+#### i. Describe an issue with the summarize() function and how to solve it. 
+
+##### Sumarize does not add much functionality alone with how it collapses results into a single row. For example, using it with the mean funtion will just return the mean exactly how it would have if you just used the mean function. To gain full functionality, one needs to use the group_by command so that the returned results are based on the group and not the entire dataset, making it a unique return not supported by using the mean function alone.
+
+
+#### j. List the functions for correlation and linear regression. 
+
+##### The corr function can calculate the correlation between two variables or all the numeric columns of a data frame. Using corrplot, one can take the output of the corr function and turn it into a graph.Linear regression is done with the lm function.
+
+
+#### k. State the eight building blocks of ggplot.
+
+##### 1. Data 2. aesthetic mapping 3. geometric object 4.  statistical transformations 5. scales 6. coordinate systems 7. position adjustments 8. faceting
+
+
+#### l. Name a conditional processing function that can be used with vector values. 
+
+##### The ifelse function is a conditional processing function that will run over all values in a vector. Loops are required if one wants to use normal if/else statements.
+
+
+``` {r import-libraries, include=FALSE}
+library(tidyverse)
+```
+
+### 2. Download and unzip the covid data.zip file. Notice that it contains 40 separate .csv files that represent the new cases of COVID-19 between 10/01/20 and 11/09/20. Write the necessary R code to answer each of the following questions.
+
+
+#### a. Use a loop to create a vector of filenames appropriate for processing all of the .csv files.
+
+``` {r filename-vector}
+filenames = vector("character", 40)
+for (i in seq_along(filenames)) {
+  filenames[[i]] = paste("day", i, ".csv", sep="")
+}
+filenames
+```
+
+#### b. Create an empty list, then use a loop to read in all of the data from the .csv files into elements of the list.
+
+``` {r import-data-list}
+covid_list = list()
+for (i in seq_along(filenames)) {
+  covid_list[[i]] = read.csv(file=filenames[[i]])
+}
+head(covid_list)
+```
+
+#### c. Convert the list of data frames into a single data frame called covid. Use glimpse to ensure that the dataframe has 40 rows and the data types look as follows
+``` {r data-frame}
+temps = bind_rows(covid_list)
+covid_data = data.frame(
+  date = temps[1],
+  United.Kingdom = temps[2],
+  Russia = temps[3],
+  Italy = temps[4],
+  USA = temps[5],
+  India = temps[6],
+  France= temps[7]
+)
+glimpse(covid_data)
+```
+
+### 3. Use the covid data set that you have obtained from 1(c) to answer the following questions.
+#### a. Convert the date column from a character type to a date type using the following. Verify with glimpse that the data type has changed.
+``` {r convert-date}
+covid_data$date = as.Date(covid_data$date, "%m/%d/%y")
+glimpse(covid_data)
+```
+
+#### b. Use a ggplot2 to produce a line graph that compares the cases of (at least) two countries. The chart should contain a legend. Also add a appropriate title, sub title, and axis label(s).
+``` {r line-graph}
+ggplot(data=covid_data) + geom_line(aes(x=date,y=USA,color="USA"), linewidth=1) +
+  geom_line(aes(x=date,y=United.Kingdom,color="United Kingdom"), linewidth=1) +
+  scale_color_manual(values=c("USA"="red", "United Kingdom"="blue")) +
+  labs(title="USA vs United Kingdom New Covid Cases by Date",
+       subtitle="USA faces a large linear growth while United Kingdom manages a small linear growth",
+       x="Date", y="Number of New Covid Cases in Thousands")
+```
+
+### 4. Use a for loop to create a vector of the average new cases over the 40 days of the covid data set for each of the 6 countries. Output these averages. Be careful not include the average of the “date” column.
+``` {r average-new-ases}
+avg_new_cases = vector()
+names = colnames(covid_data)[-1] # column names minus date
+for (i in names) {
+  avg_new_cases = append(avg_new_cases, mean(covid_data[[i]]))
+}
+avg_new_cases # in order: United Kingdom, Russia, Italy, USA, India, France
+```

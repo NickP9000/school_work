@@ -1,0 +1,93 @@
+---
+title: "Peters_Lab6_results"
+author: "Nick Peters"
+date: "2024-10-23"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r include=FALSE}
+library(tidyverse)
+```
+
+### 1. Read the following dataframe.
+```{r reading-from-dataframe}
+NBA_data <- data.frame("Jersey" = c(1,2,5,3,35,35),
+        "Player_Yearly_Salary" = c("9e1","$55K",NA,"80","95","95"),
+        "Player_Last_Names" = c("Booker","Okogie",NA, "Beal", "Durant", "Durant"),
+        "Points_Per_Game" = c("26.4P", "12.2P", "21.8P", "27.3P", NA, NA),
+        "Number_of_Cars" = c(7,1,3,3,1,2))
+glimpse(NBA_data)
+```
+
+### 2. Drop the Number_of_Cars column.
+```{r dropping-columns}
+NBA_data = NBA_data[1:4]
+glimpse(NBA_data)
+```
+
+### 3. Rename the Player_Yearly_Salary to Salary, Player_Last_Names to Name, and Points_Per_Game to Points.
+```{r renaming-columns}
+NBA_data = rename(NBA_data,
+                  Salary = Player_Yearly_Salary,
+                  Name = Player_Last_Names,
+                  Points = Points_Per_Game)
+glimpse(NBA_data)
+```
+
+### 4. Check to see if any missing values in Name coumn. If so, remove them.
+```{r removing-missing-names}
+glimpse(NBA_data$Name)
+NBA_data = drop_na(NBA_data, "Name")
+glimpse(NBA_data$Name)
+```
+
+### 5. Remove the duplicates in the data frame.
+```{r removing-duplicates}
+NBA_data = distinct(NBA_data)
+NBA_data
+```
+
+### 6. Remove "P" in Points column, change it to numeric, and update the data frame.
+```{r transform-points}
+NBA_data$Points = as.numeric(str_replace_all(NBA_data$Points, "[P]", ""))
+glimpse(NBA_data$Points)
+```
+
+### 7. Remove $ and K from Salary, convert it to numeric, and update the data frame.
+```{r transform-salary}
+NBA_data$Salary = as.numeric(str_replace_all(NBA_data$Salary, "[$K]", ""))
+glimpse(NBA_data$Salary)
+```
+
+### 8. Recode the Point NA to 34.5.
+```{r recode-point-NA}
+NBA_data$Points = replace_na(NBA_data$Points,34.5)
+glimpse(NBA_data$Points)
+```
+
+### 9. Read and append this additional below data to your dataframe.
+```{r appending-additional-lines}
+more_NBA_data <- data.frame("Jersey" = c(8,10,11),
+            "Salary" = c(65,75,30),
+            "Name" = c("Allen","Lee","Bol"),
+            "Points" = c(8.4, 3.5, 2.9))
+NBA_data = rbind(NBA_data, more_NBA_data)
+glimpse(NBA_data)
+```
+
+### 10. Merge your dataframe with the extra data below.
+```{r merging-extra-data}
+extra_NBA_data <- data.frame("Jersey" = c(1,2,3,35,8,10,11),
+                             "Position" = c("SG","SG","SG","SF","PG","SG","C"))
+NBA_data = merge(NBA_data, extra_NBA_data, by="Jersey")
+glimpse(NBA_data)
+```
+
+### 11. Export your data to a csv file (Lab6.csv).
+```{r exporting-data}
+write.csv(NBA_data,"Lab6.csv", row.names = FALSE)
+```

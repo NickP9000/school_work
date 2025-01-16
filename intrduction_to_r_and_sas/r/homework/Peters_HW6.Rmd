@@ -1,0 +1,78 @@
+---
+title: "Peters_HW6_results"
+author: "Nick Peters"
+date: "2024-10-25"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+``` {r library-tidyverse, include=FALSE}
+library(tidyverse)
+```
+
+### 1. Read telecom.csv data using the following code:
+``` {r import-data}
+churn_data = read.csv(file = 'telecom.csv', na.strings="")
+glimpse(churn_data)
+```
+
+### 2. Clean the churn_data as follows
+#### i. Drop all other columns except customerID, Monthly.Charges, Total.Charges, and Churn.
+``` {r drop-unecessary-columns}
+churn_data = churn_data[c("customerID","Monthly.Charges","Total.Charges","Churn")]
+colnames(churn_data)
+```
+
+#### ii. Rename columns Monthly.Charges as Monthly_Charges and Total.Charges as Total_Charges.
+``` {r rename-columns}
+churn_data = rename(churn_data,
+          Monthly_Charges=Monthly.Charges,
+          Total_Charges=Total.Charges)
+colnames(churn_data)
+```
+
+#### iii. Filter Data (Drop NA values in Churn column).
+``` {r drop-NA}
+glimpse(churn_data$Churn)
+churn_data = drop_na(churn_data,"Churn")
+glimpse(churn_data$Churn)
+```
+
+#### iv. Remove duplicates in the updated data set.
+``` {r remove-duplicates}
+churn_data = distinct(churn_data)
+glimpse(churn_data)
+```
+#### v. Eliminate the commas, $ sign, and convert to a numeric format for both Total_Charges and Monthly_Charges columns.
+``` {r transform-columns}
+churn_data$Total_Charges = as.numeric(str_replace_all(churn_data$Total_Charges,"[$,]",""))
+glimpse(churn_data$Total_Charges)
+churn_data$Monthly_Charges = as.numeric(str_replace_all(churn_data$Monthly_Charges,"[$]",""))
+glimpse(churn_data$Monthly_Charges) 
+```
+
+### 3. What percentage of the people indicated “yes” they have churned?
+``` {r count-yes-churned}
+churn_data$Churn == "Yes"
+sum(churn_data$Churn == "Yes")/nrow(churn_data)*100
+```
+
+### 4. What is the average monthly charges for those that churned?
+``` {r average-charges-churned}
+yes_churn_data = subset(churn_data,churn_data$Churn=="Yes")
+mean(yes_churn_data$Monthly_Charges)
+```
+
+### 5. What is the average monthly charges for those that stayed?
+``` {r average-charges-stayed}
+no_churn_data = subset(churn_data,churn_data$Churn=="No")
+mean(no_churn_data$Monthly_Charges)
+```
+
+### 6. What is the median total charges?
+``` {r median-total-charges}
+median(churn_data$Total_Charges)
+```

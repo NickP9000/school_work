@@ -1,0 +1,24 @@
+---
+title: "Peters_HW5"
+author: "Nick Peters"
+date: "2024-10-21"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Importing the data
+
+'''{r}
+movies = read.csv(file="MoviesData.csv")  
+movie_streaming = read.csv(file="MoviesStreaming.csv")
+'''
+
+## 1. Merge two datasets by ID
+'''{r}
+movie_data = merge(movies, movie_streaming, by="ID")
+'''

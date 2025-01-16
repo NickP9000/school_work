@@ -1,0 +1,68 @@
+---
+title: "Peters_HW8_results"
+author: "Nick Peters"
+date: "2024-11-10"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+``` {r import-libraries}
+library(tidyverse)
+```
+
+### 1. Read iris data in the datasets library.
+``` {r read-iris}
+head(iris)
+```
+
+### 2. How many rows in the data file?
+``` {r nrow-iris}
+nrow(iris)
+```
+
+### 3. Use glimpse to preview the data.
+``` {r glimpse-iris}
+glimpse(iris)
+```
+
+### 4. Get a basic scatter plot using ggplot for Sepal.Length vs Sepal.Width.
+``` {r length-vs-width-scatter}
+ggplot(iris, aes(Sepal.Length, Sepal.Width)) + geom_point()
+```
+
+### 5. Improve the plot in (4) by increasing the size of points and setting different colors for the points corresponding to each species.
+``` {r inproved-scatter}
+ggplot(iris, aes(Sepal.Length, Sepal.Width, color=Species)) + geom_point(size=5)
+```
+
+### 6. Add a trend line (regression line) to the data and suppress the confidence band.
+``` {r scatter-with-trend}
+ggplot(iris, aes(Sepal.Length, Sepal.Width)) + geom_point(size=5) +
+  geom_smooth(method="lm", se=F)
+```
+
+### 7. Use different shapes for the different species and regenerate the plot in (5).
+``` {r different-shapes}
+ggplot(iris, aes(Sepal.Length, Sepal.Width, color=Species, shape=Species)) + geom_point(size=5)
+```
+
+### 8. Connect the points in (7) and get a line graph.
+#### Hint: geom line()
+``` {r line-graph}
+ggplot(iris, aes(Sepal.Length, Sepal.Width, color=Species, shape=Species)) + geom_point(size=5) +
+  geom_line()
+```
+
+### 9. Generate a histogram for Petal.Length variable and fill red color.
+#### Hint: geom histogram() with additional commands
+``` {r hisogram}
+ggplot(iris, aes(Petal.Length)) + geom_histogram(bins=39, fill="red")
+```
+
+### 10. Generate a boxplot for Species vs Sepal.Width and fill lightgreen color.
+``` {r boxplot}
+ggplot(iris, aes(Species, Sepal.Width)) + geom_boxplot(fill="lightgreen")
+```

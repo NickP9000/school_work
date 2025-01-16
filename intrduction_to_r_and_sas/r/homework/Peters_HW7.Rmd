@@ -1,0 +1,85 @@
+---
+title: "Peters_HW7_results"
+author: "Nick Peters"
+date: "2024-11-01"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+``` {r import-packages}
+library(tidyverse)
+```
+
+### 1. Read vg data.csv into Rstudio.
+``` {r read-csv}
+vg_data = read.csv(file="vg_data.csv")
+```
+
+### 2. How many rows in the data file?
+``` {r num-rows}
+nrow(vg_data)
+```
+
+### 3. Use glimpse to preview the data.
+``` {r glimpse-data}
+glimpse(vg_data)
+```
+
+### 4. How many of the video games are in the ”Puzzle” Genre?
+``` {r puzzle-games}
+vg_data %>%
+    filter(Genre=="Puzzle") %>% 
+    nrow()
+```
+
+### 5. What are the titles of the top 3 video games in the “NA Sales” variables? List only the Name.
+``` {r top-NA-games}
+vg_data %>%
+    arrange(desc(NA_Sales)) %>%
+    top_n(3) %>%
+    select("Name")
+```
+
+### 6. Group the data by Genre. What is the mean JP Sales for each Genre?
+``` {r mean-jp-sales-by-genre}
+vg_data %>%
+    group_by(Genre) %>%
+    summarize(
+      mean(JP_Sales)
+    )
+```
+
+### 7. What is the average Global Sales for the NES Platform with in the ”Platform” Genre?
+``` {r mean-global-sales-NES-platformer}
+vg_data %>%
+    filter(Platform=="NES", Genre=="Platform") %>%
+    summarize(
+      mean(Global_Sales)
+    )
+```
+
+### 8. What is the correlation coefficient between JP Sales and NA Sales for the entire dataset? What is the correlation coefficient between Global Sales and NA Sales for the entire dataset?
+``` {r correlation-coefficients}
+cor(vg_data$JP_Sales, vg_data$NA_Sales)
+cor(vg_data$Global_Sales, vg_data$NA_Sales)
+```
+
+### 9. Use lm to calculate a linear regression between Global Sales and NA Sales. Plot the scatter plot and linear regression line. Change the x-label, y-label, and title.
+``` {r sales-linear-regression}
+sales_model = lm(Global_Sales~NA_Sales, vg_data)
+plot(Global_Sales~NA_Sales, data=vg_data,
+     xlab="NA Sales",
+     ylab="Global Sales",
+     main="North American Sales vs. Global Sales")
+abline(sales_model, col="blue")
+```
+
+### 10. There appears to be an outlier in the data (that has Global Sales over 80 and NA Sales over 40). Write R code to identify the name, Platform, Year, and Genre of this game.
+``` {r find-outlier}
+vg_data %>%
+    filter(Global_Sales>80, NA_Sales>40) %>%
+    select("Name", "Platform", "Year", "Genre")
+```
