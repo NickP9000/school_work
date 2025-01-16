@@ -1,0 +1,4 @@
+proc print data=SASHELP.CITIDAY;
+	var SNYDJCM DSIUSWIL;
+	format SNYDJCM DSIUSWIL DOLLAR9.2;
+run;

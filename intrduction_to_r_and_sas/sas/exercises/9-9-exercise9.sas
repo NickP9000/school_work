@@ -1,0 +1,10 @@
+proc print data=SASHELP.CITIDAY;
+	var DATE SNYDJCM DSIUSWIL;
+	format DATE DATE9.;
+	format SNYDJCM DSIUSWIL NUMERIC9.2;
+run;
+
+proc print data= SASHELP.CITIDAY;
+	var DATE SNYDJCM DSIUSWIL;
+	format DATE date9. SNYDJCM DSIUSWIL 9.2;
+run;
