@@ -1,0 +1,94 @@
+Task 1
+1. BFS is faster than DFS
+
+Configuration
+(1, 2, 3, 0, 5, 6, 4, 7, 8)
+
+BREADTH FIRST SEARCH
+Path: [<Node (1, 2, 3, 0, 5, 6, 4, 7, 8)>, <Node (1, 2, 3, 4, 5, 6, 0, 7, 8)>, <Node (1, 2, 3, 4, 5, 6, 7, 0, 8)>, <Node (1, 2, 3, 4, 5, 6, 7, 8, 0)>]
+Path Cost: 3
+Solution: ['DOWN', 'RIGHT', 'RIGHT']
+Nodes searched with BFS: 13
+Time Spent with BFS: 0.00036978721618652344
+==============
+DEPTH FIRST SEARCH
+Path: [<Node (1, 2, 3, 0, 5, 6, 4, 7, 8)>, <Node (1, 2, 3, 5, 0, 6, 4, 7, 8)>, <Node (1, 2, 3, 5, 6, 0, 4, 7, 8)>, <Node (1, 2, 3, 5, 6, 8, 4, 7, 0)>, <Node (1, 2, 3, 5, 6, 8, 4, 0, 7)>, <Node (1, 2, 3, 5, 6, 8, 0, 4, 7)>, <Node (1, 2, 3, 0, 6, 8, 5, 4, 7)>, <Node (1, 2, 3, 6, 0, 8, 5, 4, 7)>, <Node (1, 2, 3, 6, 8, 0, 5, 4, 7)>, <Node (1, 2, 3, 6, 8, 7, 5, 4, 0)>, <Node (1, 2, 3, 6, 8, 7, 5, 0, 4)>, <Node (1, 2, 3, 6, 8, 7, 0, 5, 4)>, <Node (1, 2, 3, 0, 8, 7, 6, 5, 4)>, <Node (1, 2, 3, 8, 0, 7, 6, 5, 4)>, <Node (1, 2, 3, 8, 7, 0, 6, 5, 4)>, <Node (1, 2, 3, 8, 7, 4, 6, 5, 0)>, <Node (1, 2, 3, 8, 7, 4, 6, 0, 5)>, <Node (1, 2, 3, 8, 7, 4, 0, 6, 5)>, <Node (1, 2, 3, 0, 7, 4, 8, 6, 5)>, <Node (1, 2, 3, 7, 0, 4, 8, 6, 5)>, <Node (1, 2, 3, 7, 4, 0, 8, 6, 5)>, <Node (1, 2, 3, 7, 4, 5, 8, 6, 0)>, <Node (1, 2, 3, 7, 4, 5, 8, 0, 6)>, <Node (1, 2, 3, 7, 4, 5, 0, 8, 6)>, <Node (1, 2, 3, 0, 4, 5, 7, 8, 6)>, <Node (1, 2, 3, 4, 0, 5, 7, 8, 6)>, <Node (1, 2, 3, 4, 5, 0, 7, 8, 6)>, <Node (1, 2, 3, 4, 5, 6, 7, 8, 0)>]
+Path Cost: 27
+Solution: ['RIGHT', 'RIGHT', 'DOWN', 'LEFT', 'LEFT', 'UP', 'RIGHT', 'RIGHT', 'DOWN', 'LEFT', 'LEFT', 'UP', 'RIGHT', 'RIGHT', 'DOWN', 'LEFT', 'LEFT', 'UP', 'RIGHT', 'RIGHT', 'DOWN', 'LEFT', 'LEFT', 'UP', 'RIGHT', 'RIGHT', 'DOWN']
+Nodes searched with DFS: 28
+Time Spent with DFS: 0.0008747577667236328
+
+
+2. DFS is faster than BFS
+
+Configuration
+(1, 2, 3, 4, 5, 7, 8, 6, 0)
+
+BREADTH FIRST SEARCH
+Path: [<Node (1, 2, 3, 4, 5, 7, 8, 6, 0)>, <Node (1, 2, 3, 4, 5, 7, 8, 0, 6)>, <Node (1, 2, 3, 4, 5, 7, 0, 8, 6)>, <Node (1, 2, 3, 0, 5, 7, 4, 8, 6)>, <Node (1, 2, 3, 5, 0, 7, 4, 8, 6)>, <Node (1, 2, 3, 5, 7, 0, 4, 8, 6)>, <Node (1, 2, 3, 5, 7, 6, 4, 8, 0)>, <Node (1, 2, 3, 5, 7, 6, 4, 0, 8)>, <Node (1, 2, 3, 5, 0, 6, 4, 7, 8)>, <Node (1, 2, 3, 0, 5, 6, 4, 7, 8)>, <Node (1, 2, 3, 4, 5, 6, 0, 7, 8)>, <Node (1, 2, 3, 4, 5, 6, 7, 0, 8)>, <Node (1, 2, 3, 4, 5, 6, 7, 8, 0)>]
+Path Cost: 12
+Solution: ['LEFT', 'LEFT', 'UP', 'RIGHT', 'RIGHT', 'DOWN', 'LEFT', 'UP', 'LEFT', 'DOWN', 'RIGHT', 'RIGHT']
+Nodes searched with BFS: 1840
+Time Spent with BFS: 0.2730257511138916
+==============
+DEPTH FIRST SEARCH
+Path Cost: 2896
+Nodes searched with DFS: 2975
+Time Spent with DFS: 1.0891754627227783
+
+
+3. Explanation
+
+A lot of what determines whether BFS or DFS is faster depends on where the goal node is located. The closest goal node could lie
+relatively shallow in the tree, but in a different branch than DFS first checks. In this case, BFS will obviously win due to how it
+searches one depth at a time. In another puzzle, the closest goal node could be relatively deep in a branch DFS can easily get to.
+In this case, DFS's drive to search out an entire branch will allow it to perform better. In the case of DFS, the process of 
+searching by one depth at a time will mean that it loses time searching nodes which do not lead to the closest goal. As one can
+see, the location of the goal node is highly important in finding the path with the lowest node cost.
+
+
+Task 2
+1. Several configurations with IDS
+
+(1, 2, 3, 0, 5, 6, 4, 7, 8)
+==============
+ITERATIVE DEEPENING SEARCH
+Path: [<Node (1, 2, 3, 0, 5, 6, 4, 7, 8)>, <Node (1, 2, 3, 4, 5, 6, 0, 7, 8)>, <Node (1, 2, 3, 4, 5, 6, 7, 0, 8)>, <Node (1, 2, 3, 4, 5, 6, 7, 8, 0)>]
+Path Cost: 3
+Solution: ['DOWN', 'RIGHT', 'RIGHT']
+Nodes searched with IDS: 35
+Time Spent with IDS: 0.0005116462707519531
+==============
+
+(1, 2, 3, 4, 5, 6, 0, 7, 8)
+==============
+ITERATIVE DEEPENING SEARCH
+Path: [<Node (1, 2, 3, 4, 5, 6, 0, 7, 8)>, <Node (1, 2, 3, 4, 5, 6, 7, 0, 8)>, <Node (1, 2, 3, 4, 5, 6, 7, 8, 0)>]
+Path Cost: 2
+Solution: ['RIGHT', 'RIGHT']
+Nodes searched with IDS: 6
+Time Spent with IDS: 8.082389831542969e-05
+==============
+
+(1, 2, 3, 4, 5, 7, 8, 6, 0)
+==============
+ITERATIVE DEEPENING SEARCH
+Path: [<Node (1, 2, 3, 4, 5, 7, 8, 6, 0)>, <Node (1, 2, 3, 4, 5, 7, 8, 0, 6)>, <Node (1, 2, 3, 4, 5, 7, 0, 8, 6)>, <Node (1, 2, 3, 0, 5, 7, 4, 8, 6)>, <Node (1, 2, 3, 5, 0, 7, 4, 8, 6)>, <Node (1, 2, 3, 5, 7, 0, 4, 8, 6)>, <Node (1, 2, 3, 5, 7, 6, 4, 8, 0)>, <Node (1, 2, 3, 5, 7, 6, 4, 0, 8)>, <Node (1, 2, 3, 5, 0, 6, 4, 7, 8)>, <Node (1, 2, 3, 0, 5, 6, 4, 7, 8)>, <Node (1, 2, 3, 4, 5, 6, 0, 7, 8)>, <Node (1, 2, 3, 4, 5, 6, 7, 0, 8)>, <Node (1, 2, 3, 4, 5, 6, 7, 8, 0)>]
+Path Cost: 12
+Solution: ['LEFT', 'LEFT', 'UP', 'RIGHT', 'RIGHT', 'DOWN', 'LEFT', 'UP', 'LEFT', 'DOWN', 'RIGHT', 'RIGHT']
+Nodes searched with IDS: 35360
+Time Spent with IDS: 0.3777635097503662
+==============
+
+2. How to know it is optimal?
+
+IDS is optimal because it uses the best concepts from both BFS and DFS. Although it uses a depth limited search, a form of DFS,
+because it searches one extra depth at a time, it is guaranteed to find the optimal solution. This is much like how DFS searches
+a single depth before moving onto the next depth. By using a DFS based search, we get the memory efficiency from DFS. This is due
+to the fact that, in BFS, there can be a large breadth of nodes to store.
+
+3. Why is IDS preferred over BFS and DFS for problems where the search space is large and the depth is unknown?
+
+Many of the reasons why it is optimal are also reasons why it is preferred in a situation where the search space is large and the
+depth is unkown. Even though IDS searches more nodes, it combines the best parts about BFS and DFS. With the guarantee of getting 
+the optimal path (from BFS) and having memory efficiency (from DFS). It is clear why it is preferred over just BFS or DFS.
