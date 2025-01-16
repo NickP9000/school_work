@@ -1,0 +1,8 @@
+ID,Name,Age,Salary,Join Date,Status,Address
+1,John Doe,34,"$50,000 ",1/15/22,Active,"123 Main St, New York"
+2,Jane Smith,28,"$62,000 ",7/10/21,Active,"456 Elm St, Los Angeles"
+3,James Brown,,N/A,3/20/23,Inactive,"789 Pine St, Chicago"
+4,Emily White,42,"$75,000 ",5/22/21,Inactive,"101 Oak St, Houston"
+5,Lisa Green,29,"$52,000 ",11/15/19,Inactive,NULL
+6,Tom Hanks,36,"$46,000 ",3/17/20,Active,NULL
+7,John Doe,34,"$50,000 ",1/15/22,Active,"123 Main St, New York"
