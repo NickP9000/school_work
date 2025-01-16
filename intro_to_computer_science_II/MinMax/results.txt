@@ -1,0 +1,2 @@
+The minimum in data.txt is: -5
+The maximum in data.txt is: 234
